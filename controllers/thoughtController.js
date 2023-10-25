@@ -1,5 +1,4 @@
-const Thought = require('../models/Thought'); // Import Thought model
-const User = require('../models/User'); // Import the User model
+const { Thought, User } = require("../models");
 
 module.exports = {
   async getThoughts(req, res) {

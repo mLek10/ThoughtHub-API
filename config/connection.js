@@ -1,18 +1,30 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-network', {
+const dbURI = 'mongodb://localhost/27017/thoughthub-api'; 
+
+mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
-  useCreateIndex: true,
+  useCreateIndex: true, 
+  useFindAndModify: false, 
 });
 
 mongoose.connection.on('connected', () => {
-  console.log('Connected to MongoDB');
+  console.log('Mongoose connected to ' + dbURI);
 });
 
 mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
+  console.log('Mongoose connection error: ' + err);
 });
 
-module.exports = mongoose.connection;
+mongoose.connection.on('disconnected', () => {
+  console.log('Mongoose disconnected');
+});
+
+process.on('SIGINT', () => {
+  mongoose.connection.close(() => {
+    console.log('Mongoose disconnected through app termination');
+    process.exit(0);
+  });
+});
+
