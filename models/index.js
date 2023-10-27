@@ -1,4 +1,4 @@
-// init.js or dbSetup.js
+
 const User = require('./User');
 const Thought = require('./Thought');
 const Reaction = require('./Reaction');
@@ -26,9 +26,9 @@ newThought.save()
   .catch((err) => {
     console.error(err);
   });
-  
-  module.exports = {
-    User,
-    Thought,
-    Reaction
-  };
+
+module.exports = {
+  User,
+  Thought,
+  Reaction
+};

@@ -116,10 +116,11 @@ module.exports = {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $pull: { tags: { tagId: req.params.tagId } },
-        new: true
-      }
-      
+        {
+          $pull: { tags: { tagId: req.params.tagId } },
+          new: true
+        }
+
       );
 
       if (!thought) {

@@ -6,8 +6,8 @@ const dbURI = 'mongodb://localhost:27017/thoughthub-api';
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true, 
-  useFindAndModify: false, 
+  useCreateIndex: true,
+  useFindAndModify: false,
 });
 
 mongoose.connection.on('connected', () => {

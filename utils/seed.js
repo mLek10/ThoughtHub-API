@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 const { users, thoughts } = require('./seed'); // Import the seed data
 
-const dbURI = 'mongodb://localhost:27017/thoughthub-api'; // Replace with your MongoDB URI
+const dbURI = 'mongodb://localhost:27017/thoughthub-api';
 
 mongoose.connect(dbURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
-const User = require('./models/User'); // Import your User model
-const Thought = require('./models/Thought'); // Import your Thought model
+const User = require('./models/User');
+const Thought = require('./models/Thought');
 
 async function seedDatabase() {
   try {
