@@ -1,6 +1,6 @@
 // init.js or dbSetup.js
 const User = require('./User');
-const Thought = require('./Thought'); // Adjust the path based on your project structure
+const Thought = require('./Thought');
 const Reaction = require('./Reaction');
 
 // Create a new thought
@@ -26,4 +26,9 @@ newThought.save()
   .catch((err) => {
     console.error(err);
   });
-  module.exports = { User, Thought };
+  
+  module.exports = {
+    User,
+    Thought,
+    Reaction
+  };

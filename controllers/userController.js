@@ -1,9 +1,9 @@
-const { User, Thought } = require('../models');
+const { User } = require('../models');
 
 module.exports = {
   async getUsers(req, res) {
     try {
-      const users = await User.find().populate("applications");
+      const users = await User.find().populate("thoughts");
       res.json(users);
     } catch (err) {
       res.status(500).json(err);
@@ -14,7 +14,7 @@ module.exports = {
     try {
       const user = await User.findOne({ _id: req.params.userId })
         .select('-__v')
-        .populate("applications");
+        .populate("thoughts");
 
       if (!user) {
         return res.status(404).json({ message: 'No user with that ID' });
@@ -43,7 +43,7 @@ module.exports = {
         return res.status(404).json({ message: 'No user with that ID' });
       }
 
-      //logic for deleting associated applications
+      //logic for deleting associated thoughts
       res.json({ message: 'User and associated apps deleted!' });
     } catch (err) {
       res.status(500).json(err);

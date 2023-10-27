@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 
-const dbURI = 'mongodb://localhost/27017/thoughthub-api'; 
+const dbURI = 'mongodb://localhost:27017/thoughthub-api';
+
 
 mongoose.connect(dbURI, {
   useNewUrlParser: true,

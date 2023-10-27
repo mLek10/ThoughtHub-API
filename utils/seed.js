@@ -1,24 +1,32 @@
-const connection = require('../config/connection');
-const { User, Thought } = require('../models');
-const { users, thoughts } = require('./data');
+const mongoose = require('mongoose');
+const { users, thoughts } = require('./seed'); // Import the seed data
 
-connection.on('error', (err) => err);
+const dbURI = 'mongodb://localhost:27017/thoughthub-api'; // Replace with your MongoDB URI
 
-connection.once('open', async () => {
-  console.log('connected');
-
-  // Drop existing users
-  await User.deleteMany({});
-
-  // Drop existing thoughts
-  await Thought.deleteMany({});
-
-  // Add users from data
-  await User.collection.insertMany(users);
-
-  // Add thoughts from data
-  await Thought.collection.insertMany(thoughts); 
-  
-  console.info('Seed complete');
-  process.exit(0);
+mongoose.connect(dbURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
+
+const User = require('./models/User'); // Import your User model
+const Thought = require('./models/Thought'); // Import your Thought model
+
+async function seedDatabase() {
+  try {
+    // Clear existing data
+    await User.deleteMany({});
+    await Thought.deleteMany({});
+
+    // Insert seed data
+    await User.insertMany(users);
+    await Thought.insertMany(thoughts);
+
+    console.log('Database seeded successfully');
+  } catch (err) {
+    console.error('Error seeding the database:', err);
+  } finally {
+    mongoose.disconnect();
+  }
+}
+
+seedDatabase();
