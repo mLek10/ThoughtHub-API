@@ -19,7 +19,7 @@ const ThoughtSchema = new mongoose.Schema({
   reactions: [
     {
       type: Schema.Types.ObjectId,
-      ref: 'Reaction', // Reference to the Reaction model
+      ref: ReactionSchema,
     },
   ],
 });

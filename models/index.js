@@ -1,7 +1,7 @@
-
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const User = require('./User');
 const Thought = require('./Thought');
-const Reaction = require('./Reaction');
 
 // Create a new thought
 const newThought = new Thought({
@@ -30,5 +30,5 @@ newThought.save()
 module.exports = {
   User,
   Thought,
-  Reaction
+  Schema
 };
