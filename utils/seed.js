@@ -1,13 +1,5 @@
 const mongoose = require('mongoose');
-const { users, thoughts } = require('./seed'); // Import the seed data
-
-const dbURI = 'mongodb://localhost:27017/thoughthub-api';
-
-mongoose.connect(dbURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
+const { users, thoughts } = require('./seed');
 const User = require('./models/User');
 const Thought = require('./models/Thought');
 
@@ -29,4 +21,14 @@ async function seedDatabase() {
   }
 }
 
-seedDatabase();
+// Establish database connection and seed the data
+mongoose.connect(dbURI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => {
+  console.log('Database connected');
+  return seedDatabase();
+})
+.catch((err) => console.error('Error connecting to the database:', err));
+
