@@ -1,39 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
-const ThoughtSchema = new mongoose.Schema({
-  thoughtText: {
-    type: String,
-    required: true,
-    minlength: 1,
-    maxlength: 280,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
-  username: {
-    type: String,
-    required: true,
-  },
-  reactions: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: ReactionSchema,
-    },
-  ],
-});
-
-ThoughtSchema.virtual('reactionCount').get(function () {
-  return this.reactions.length;
-});
-
-
+// Reaction Schema
 const ReactionSchema = new mongoose.Schema({
-  reactionId: {
-    type: mongoose.Schema.Types.ObjectId,
-    default: () => new mongoose.Types.ObjectId(),
-  },
   reactionBody: {
     type: String,
     required: true,
@@ -49,5 +18,26 @@ const ReactionSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Reaction', ReactionSchema);
-module.exports = mongoose.model('Thought', ThoughtSchema);
+// Thought Schema
+const ThoughtSchema = new mongoose.Schema({
+  thoughtText: {
+    type: String,
+    required: true,
+    minlength: 1,
+    maxlength: 280,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
+  username: {
+    type: String,
+    required: true,
+  },
+  reactions: [ReactionSchema], // Embed the ReactionSchema as a subdocument
+});
+
+module.exports = {
+  Thought: mongoose.model('Thought', ThoughtSchema),
+  Reaction: mongoose.model('Reaction', ReactionSchema),
+};

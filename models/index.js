@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const User = require('./User');
-const Thought = require('./Thought');
+const {Thought, Reaction} = require('./Thought');
 
 // Create a new thought
 const newThought = new Thought({
