@@ -12,7 +12,8 @@ app.use(express.json());
 app.use('/users', userRoutes);
 app.use('/thoughts', thoughtRoutes);
 
-
+connection.once('open', () => {
   app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
   });
+});

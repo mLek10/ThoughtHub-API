@@ -15,16 +15,16 @@ const users = [
 
 const thoughts = [
   {
-    thoughtText: 'Sample thought 1',
+    thoughtText: 'I have a thought!',
     username: 'user1',
   },
   {
-    thoughtText: 'Sample thought 2',
+    thoughtText: 'I have a better thought!',
     username: 'user2',
   },
   {
-    thoughtText: 'Sample thought 3',
-    username: 'user1',
+    thoughtText: 'I have the best thought!',
+    username: 'user3',
   },
 ];
 
