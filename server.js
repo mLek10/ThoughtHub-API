@@ -1,5 +1,5 @@
 const express = require('express');
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const thoughtRoutes = require('./routes/thoughtRoutes');
 const connection = require('./config/connection');

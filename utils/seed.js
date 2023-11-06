@@ -1,17 +1,44 @@
 const mongoose = require('mongoose');
-const { users, thoughts } = require('./seed');
-const User = require('./models/User');
-const Thought = require('./models/Thought');
+const {User, Thought} = require(`../models`);
 
 async function seedDatabase() {
   try {
-    // Clear existing data
-    await User.deleteMany({});
-    await Thought.deleteMany({});
+    // // Clear existing data
+    // await User.deleteMany({});
+    // await Thought.deleteMany({});
 
     // Insert seed data
-    await User.insertMany(users);
-    await Thought.insertMany(thoughts);
+   await User.insertMany([
+      {
+        username: 'user1',
+        email: 'user1@example.com',
+      },
+      {
+        username: 'user2',
+        email: 'user2@example.com',
+      },
+      {
+        username: 'user3',
+        email: 'user3@example.com',
+      },
+    ]);
+    await Thought.insertMany([
+    // const thoughts = [
+      {
+        thoughtText: 'I have a thought!',
+        username: 'user1',
+      },
+      {
+        thoughtText: 'I have a better thought!',
+        username: 'user2',
+      },
+      {
+        thoughtText: 'I have the best thought!',
+        username: 'user3',
+      },
+    ]);
+    
+   
 
     console.log('Database seeded successfully');
   } catch (err) {
@@ -19,7 +46,7 @@ async function seedDatabase() {
   } finally {
     mongoose.disconnect();
   }
-}
+};
 
 // Establish database connection and seed the data
 mongoose.connect(dbURI, {

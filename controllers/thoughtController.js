@@ -1,6 +1,7 @@
 const { Thought, User } = require("../models");
 
 module.exports = {
+  //get thoughts
   async getThoughts(req, res) {
     try {
       const thoughts = await Thought.find();
@@ -9,7 +10,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-
+//get single thought
   async getSingleThought(req, res) {
     try {
       const thought = await Thought.findOne({ _id: req.params.thoughtId });
@@ -23,7 +24,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-
+//create thought
   async createThought(req, res) {
     try {
       const thought = await Thought.create(req.body);
@@ -46,7 +47,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-
+//update thought
   async updateThought(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
@@ -65,7 +66,7 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-
+//delete thought
   async deleteThought(req, res) {
     try {
       const thought = await Thought.findOneAndRemove({ _id: req.params.thoughtId });
@@ -92,12 +93,12 @@ module.exports = {
       res.status(500).json(err);
     }
   },
-
-  async addTag(req, res) {
+//add reaction
+  async addReaction(req, res) {
     try {
       const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
-        { $addToSet: { tags: req.body } },
+        { $addToSet: { reactions: req.body } },
         { runValidators: true, new: true }
       );
 
@@ -111,13 +112,12 @@ module.exports = {
     }
   },
 
-  // Remove a tag from a thought
-  async removeTag(req, res) {
-    try {
-      const thought = await Thought.findOneAndUpdate(
+  // delete a reaction
+  async deleteReaction(req, res) {
+    try { const thought = await Thought.findOneAndUpdate(
         { _id: req.params.thoughtId },
         {
-          $pull: { tags: { tagId: req.params.tagId } },
+          $pull: { reactions: { reactionId: req.params.reactionId } },
           new: true
         }
 
