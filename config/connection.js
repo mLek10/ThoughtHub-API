@@ -13,7 +13,6 @@ mongoose.connect('mongodb://127.0.0.1/thoughthub-api', {
 //   .connect(dbURI, {
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true,
-//     createIndexes: "throw", // Add this option if needed
 //   })
 //   .then(() => {
 //     console.log('MongoDB connected successfully');
