@@ -1,12 +1,13 @@
 // const mongoose = require('mongoose');
+const connection = require("../config/connection");
 const {User, Thought} = require(`../models`);
 // const dbURI = 'mongodb://localhost:27017/thoughthub-api';
 
 async function seedDatabase() {
   try {
     // // Clear existing data
-    // await User.deleteMany({});
-    // await Thought.deleteMany({});
+    await User.deleteMany({});
+    await Thought.deleteMany({});
 
     // Insert seed data
    await User.insertMany([
@@ -46,7 +47,11 @@ async function seedDatabase() {
     console.error('Error seeding the database:', err);
   }
 };
-seedDatabase();
+
+connection.once('open', async () => {
+  seedDatabase();
+  });
+  
 
 // Establish database connection and seed the data
 // mongoose.connect(dbURI, {
